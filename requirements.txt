@@ -1,0 +1,16 @@
+# Core ML & Vision
+numpy==1.26.4
+opencv-python==4.10.0.84
+scikit-learn==1.5.2
+Pillow==10.4.0
+
+# Web Framework
+Flask==3.0.0
+Flask-SocketIO==5.3.6
+eventlet==0.35.1
+nltk==3.8.1
+
+# MediaPipe & Utilities
+mediapipe==0.10.9
+deep-translator==1.11.4
+gTTS==2.5.1
