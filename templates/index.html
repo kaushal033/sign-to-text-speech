@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sign Language to Text & Speech Conversion System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="logo-bracket">[</span>
+      <span class="logo-text">Sign Language to Text<span class="accent"> & </span>Speech Conversion System</span>
+      <span class="logo-bracket">]</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home"   class="nav-link active" data-page="home">Home</a></li>
+      <li><a href="#live"   class="nav-link"        data-page="live">Live</a></li>
+      <li><a href="#howto"  class="nav-link"        data-page="howto">How to Use</a></li>
+      <li><a href="#about"  class="nav-link"        data-page="about">About</a></li>
+    </ul>
+
+    <button class="theme-toggle" id="themeToggle" title="Toggle light / dark mode" aria-label="Toggle theme">
+      <span class="theme-icon-dark"><i class="fa fa-sun"></i></span>
+      <span class="theme-icon-light"><i class="fa fa-moon"></i></span>
+      <span class="theme-toggle-label" id="themeLabel">Light</span>
+    </button>
+  </div>
+</nav>
+
+<section class="page" id="home">
+
+  <div class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">ASL · Real Time · ML Powered</p>
+      <h1 class="hero-title">
+        Bridging the<br>
+        <span class="title-highlight">Communication Gap</span><br>
+        <span class="title-sub">through Sign Language</span>
+      </h1>
+      <p class="hero-desc">
+        A real time American Sign Language recognition system that converts hand gestures into
+        text and speech, powered by MediaPipe landmark detection and a Random Forest classifier.
+      </p>
+      <div class="hero-cta">
+        <a href="#live" class="btn-primary" data-page="live">
+          <i class="fa fa-video"></i> Start Live Demo
+        </a>
+        <a href="#howto" class="btn-ghost" data-page="howto">
+          <i class="fa fa-book-open"></i> How It Works
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><span class="hstat-num">38</span><span class="hstat-label">Sign Classes</span></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><span class="hstat-num">42</span><span class="hstat-label">Hand Landmarks</span></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><span class="hstat-num">3</span><span class="hstat-label">Languages</span></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><span class="hstat-num">~95%</span><span class="hstat-label">Accuracy</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="asl-grid-wrap">
+        <img src="https://raw.githubusercontent.com/uzibytes/Sign2Text/master/hand-signs-of-the-ASL-Language.png"
+             alt="ASL Alphabet Chart" class="asl-chart"/>
+        <div class="asl-glow"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section features-section">
+    <p class="section-label">Core Features</p>
+    <h2 class="section-title">What This System Does</h2>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fa fa-hand-paper"></i></div>
+        <h3>Real Time Recognition</h3>
+        <p>21 hand landmarks extracted per frame via MediaPipe. Stabilization buffer ensures accurate, jitter free character detection.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fa fa-language"></i></div>
+        <h3>Multi Language Output</h3>
+        <p>Recognized text is translated to Hindi or Gujarati on demand. Native TTS speaks the output in the selected language.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fa fa-brain"></i></div>
+        <h3>Word Suggestions</h3>
+        <p>Offline NLP via NLTK bigram corpus. As you sign letters, the system predicts word completions and next word suggestions.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fa fa-chart-bar"></i></div>
+        <h3>Performance Dashboard</h3>
+        <p>Live confidence score, characters per minute, hand detection rate, and full session statistics tracked in real time.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fa fa-comment-dots"></i></div>
+        <h3>Word & Sentence Builder</h3>
+        <p>Space gesture separates words, full stop gesture completes sentences. Each word is spoken aloud as it is formed.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fa fa-bolt"></i></div>
+        <h3>Random Forest Model</h3>
+        <p>Scikit-learn Random Forest trained on a custom 38 class ASL dataset. Runs at inference in milliseconds per frame.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section tech-section">
+    <p class="section-label">Tech Stack</p>
+    <h2 class="section-title">Built With</h2>
+    <div class="tech-row">
+      <div class="tech-pill"><i class="fab fa-python"></i> Python 3.11</div>
+      <div class="tech-pill">MediaPipe</div>
+      <div class="tech-pill">scikit-learn</div>
+      <div class="tech-pill">OpenCV</div>
+      <div class="tech-pill">Flask + SocketIO</div>
+      <div class="tech-pill">NLTK</div>
+      <div class="tech-pill">deep-translator</div>
+      <div class="tech-pill">gTTS</div>
+      <div class="tech-pill">NumPy</div>
+    </div>
+  </div>
+
+</section>
+
+<section class="page hidden" id="live">
+  <div class="live-layout">
+
+    <div class="live-left">
+      <div class="video-wrap">
+        <img id="videoFeed" src="/video_feed" alt="Live Camera Feed"/>
+        <div class="video-overlay-tl" id="confBadge">
+          <i class="fa fa-circle-dot"></i> <span id="confVal">0</span>% conf
+        </div>
+        <div class="video-paused-badge hidden" id="pausedBadge">⏸ PAUSED</div>
+      </div>
+
+      <div class="lang-switcher">
+        <span class="lang-label">Output Language:</span>
+        <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
+        <button class="lang-btn" data-lang="hi">🇮🇳 Hindi</button>
+        <button class="lang-btn" data-lang="gu">🏳 Gujarati</button>
+      </div>
+
+      <div class="ctrl-row">
+        <button class="ctrl-btn danger"   id="btnReset">  <i class="fa fa-rotate-left"></i>  Reset</button>
+        <button class="ctrl-btn warning"  id="btnPause">  <i class="fa fa-pause"></i>         Pause</button>
+        <button class="ctrl-btn success"  id="btnSpeak">  <i class="fa fa-volume-high"></i>   Speak</button>
+        <button class="ctrl-btn info"     id="btnTranslate"><i class="fa fa-language"></i>   Translate</button>
+      </div>
+    </div>
+
+    <div class="live-right">
+
+      <div class="output-panel">
+        <div class="output-row">
+          <span class="out-label">Current Sign</span>
+          <span class="out-value accent" id="outChar">—</span>
+        </div>
+        <div class="output-row">
+          <span class="out-label">Current Word</span>
+          <span class="out-value" id="outWord">—</span>
+        </div>
+        <div class="output-row sentence-row">
+          <span class="out-label">Sentence</span>
+          <span class="out-value sentence-val" id="outSentence">—</span>
+        </div>
+        <div class="output-row" id="translatedRow" style="display:none">
+          <span class="out-label">Translated</span>
+          <span class="out-value translated-val" id="outTranslated">—</span>
+        </div>
+      </div>
+
+      <div class="suggestions-panel">
+        <p class="panel-title"><i class="fa fa-wand-magic-sparkles"></i> Word Suggestions</p>
+        <div class="suggestions-row" id="suggestionsRow">
+          <span class="no-suggestions">Start signing to see suggestions…</span>
+        </div>
+      </div>
+
+      <div class="dashboard-panel">
+        <p class="panel-title"><i class="fa fa-gauge-high"></i> Performance Dashboard</p>
+        <div class="dash-grid">
+          <div class="dash-card">
+            <div class="dash-val" id="dashCPM">0</div>
+            <div class="dash-lbl">Chars / Min</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-val" id="dashConf">0%</div>
+            <div class="dash-lbl">Confidence</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-val" id="dashDetection">0%</div>
+            <div class="dash-lbl">Detection Rate</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-val" id="dashChars">0</div>
+            <div class="dash-lbl">Session Chars</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-val" id="dashWords">0</div>
+            <div class="dash-lbl">Session Words</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-val" id="dashSents">0</div>
+            <div class="dash-lbl">Sentences</div>
+          </div>
+        </div>
+        <div class="conf-bar-wrap">
+          <div class="conf-bar-label">Live Confidence</div>
+          <div class="conf-bar-track">
+            <div class="conf-bar-fill" id="confBarFill" style="width:0%"></div>
+          </div>
+          <span class="conf-bar-pct" id="confBarPct">0%</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="page hidden" id="howto">
+  <div class="section">
+    <p class="section-label">Guide</p>
+    <h2 class="section-title">How to Use</h2>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Setup Environment</h3>
+        <p>Create a conda environment with Python 3.11 and install all dependencies including the new web stack.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Launch the Server</h3>
+        <p>Run the Flask server. Open <strong>http://localhost:5000</strong> in your browser. Ensure your webcam is connected and accessible.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Navigate to Live</h3>
+        <p>Click the <strong>Live</strong> tab in the navigation. The webcam feed will start automatically. Allow camera permissions if prompted by your browser.</p>
+        <div class="step-tip"><i class="fa fa-lightbulb"></i> Best results in good lighting with a plain background behind your hand.</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <h3>Sign Letters</h3>
+        <p>Hold an ASL letter sign steady in front of the camera. The system requires the same sign for <strong>~1 second</strong> before registering. Current sign and confidence appear on screen.</p>
+        <div class="step-tip"><i class="fa fa-lightbulb"></i> Use the Space gesture to complete a word, Full stop to end a sentence.</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">05</div>
+        <h3>Use Word Suggestions</h3>
+        <p>As you sign letters, the system predicts word completions using NLTK's Brown corpus bigrams. Click any suggestion pill to instantly fill the current word.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">06</div>
+        <h3>Translate & Speak</h3>
+        <p>Select <strong>Hindi</strong> or <strong>Gujarati</strong> from the language switcher, then click <strong>Translate</strong>. Click <strong>Speak</strong> to hear the output in the selected language via text to speech.</p>
+      </div>
+    </div>
+
+    <div class="signs-ref">
+      <p class="section-label" style="margin-top:3rem">Reference</p>
+      <h2 class="section-title" style="font-size:1.6rem">Special Gestures</h2>
+      <div class="special-signs">
+        <div class="ssign-card">
+          <div class="ssign-icon"><i class="fa fa-space-shuttle"></i></div>
+          <h4>Space</h4>
+          <p>Completes the current word, adds it to the sentence, and speaks it aloud.</p>
+        </div>
+        <div class="ssign-card">
+          <div class="ssign-icon"><i class="fa fa-circle-dot"></i></div>
+          <h4>Full Stop ( . )</h4>
+          <p>Closes the current word and ends the sentence with a period.</p>
+        </div>
+        <div class="ssign-card">
+          <div class="ssign-icon"><i class="fa fa-rotate-left"></i></div>
+          <h4>Reset Button</h4>
+          <p>Clears all current word, sentence, and session statistics instantly.</p>
+        </div>
+        <div class="ssign-card">
+          <div class="ssign-icon"><i class="fa fa-pause"></i></div>
+          <h4>Pause Button</h4>
+          <p>Freezes recognition without closing the camera feed. Useful for breaks.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page hidden" id="about">
+  <div class="section">
+
+    <div class="project-details">
+      <p class="section-label" style="margin-top:3rem">Project Details</p>
+      <div class="details-grid">
+        <div class="detail-item"><span class="detail-label">Dataset</span><span class="detail-val">Custom 38 ASL classes, 100 images each</span></div>
+        <div class="detail-item"><span class="detail-label">Features</span><span class="detail-val">42 normalized MediaPipe landmarks per sample</span></div>
+        <div class="detail-item"><span class="detail-label">Model</span><span class="detail-val">Random Forest Classifier (scikit-learn 1.5.2)</span></div>
+        <div class="detail-item"><span class="detail-label">Languages</span><span class="detail-val">English, Hindi, Gujarati</span></div>
+        <div class="detail-item"><span class="detail-label">NLP</span><span class="detail-val">NLTK Brown corpus bigrams for word suggestion</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-logo">[Sign Language to Text<span class="accent"> & </span>Speech Conversion System]</span>
+  </div>
+</footer>
+
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script>
+
+const pages    = document.querySelectorAll('.page');
+const navLinks = document.querySelectorAll('[data-page]');
+let activePage = document.querySelector('.page:not(.hidden)') || pages[0];
+
+pages.forEach(p => {
+  if (p !== activePage) p.classList.add('hidden');
+});
+activePage.classList.add('page-enter');
+
+function showPage(id) {
+  const next = document.getElementById(id);
+  if (!next || next === activePage) return;
+
+  const current = activePage;
+
+  navLinks.forEach(l => l.classList.toggle('active', l.dataset.page === id));
+
+  current.classList.remove('page-enter');
+  current.classList.add('page-exit');
+
+  const EXIT_MS = 220;
+  setTimeout(() => {
+    current.classList.add('hidden');
+    current.classList.remove('page-exit');
+
+    next.classList.remove('hidden');
+    void next.offsetWidth;
+    next.classList.add('page-enter');
+
+    activePage = next;
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, EXIT_MS);
+}
+
+navLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    showPage(link.dataset.page);
+  });
+});
+
+const socket = io();
+let currentLang = 'en';
+let isPaused = false;
+
+socket.on('state_update', function(data) {
+  document.getElementById('outChar').textContent     = data.char || '—';
+  document.getElementById('outWord').textContent     = data.word || '—';
+  document.getElementById('outSentence').textContent = data.sentence || '—';
+  document.getElementById('confVal').textContent     = data.confidence;
+  updateSuggestions(data.suggestions || []);
+  updateConfBar(data.confidence);
+});
+
+socket.on('paused', function(data) {
+  isPaused = data.paused;
+  const btn = document.getElementById('btnPause');
+  const badge = document.getElementById('pausedBadge');
+  btn.innerHTML = isPaused
+    ? '<i class="fa fa-play"></i> Resume'
+    : '<i class="fa fa-pause"></i> Pause';
+  badge.classList.toggle('hidden', !isPaused);
+});
+
+function updateSuggestions(words) {
+  const row = document.getElementById('suggestionsRow');
+  if (!words.length) {
+    row.innerHTML = '<span class="no-suggestions">Start signing to see suggestions…</span>';
+    return;
+  }
+  row.innerHTML = words.map(w =>
+    `<button class="suggestion-pill" onclick="applySuggestion('${w}')">${w}</button>`
+  ).join('');
+}
+
+function applySuggestion(word) {
+  socket.emit('apply_suggestion', { word });
+}
+
+function updateConfBar(pct) {
+  const fill = document.getElementById('confBarFill');
+  const label = document.getElementById('confBarPct');
+  fill.style.width = pct + '%';
+  fill.style.background = pct > 70 ? '#1abc9c' : pct > 40 ? '#f39c12' : '#e74c3c';
+  label.textContent = pct + '%';
+}
+
+function pollStats() {
+  fetch('/api/stats')
+    .then(r => r.json())
+    .then(d => {
+      document.getElementById('dashCPM').textContent       = d.cpm;
+      document.getElementById('dashConf').textContent      = d.confidence + '%';
+      document.getElementById('dashDetection').textContent = d.detection_rate + '%';
+      document.getElementById('dashChars').textContent     = d.session_chars;
+      document.getElementById('dashWords').textContent     = d.session_words;
+      document.getElementById('dashSents').textContent     = d.session_sentences;
+      document.getElementById('confVal').textContent       = d.confidence;
+      updateConfBar(d.confidence);
+    }).catch(() => {});
+}
+setInterval(pollStats, 2000);
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentLang = btn.dataset.lang;
+    socket.emit('set_language', { lang: currentLang });
+    document.getElementById('translatedRow').style.display = 'none';
+  });
+});
+
+document.getElementById('btnReset').addEventListener('click', () => {
+  socket.emit('reset');
+  document.getElementById('outTranslated').textContent = '—';
+  document.getElementById('translatedRow').style.display = 'none';
+});
+
+document.getElementById('btnPause').addEventListener('click', () => {
+  socket.emit('toggle_pause');
+});
+
+document.getElementById('btnSpeak').addEventListener('click', () => {
+  const sentence = document.getElementById('outSentence').textContent;
+  if (!sentence || sentence === '—') return;
+
+  if (currentLang === 'en') {
+    const utt = new SpeechSynthesisUtterance(sentence);
+    utt.lang = 'en-US';
+    window.speechSynthesis.speak(utt);
+  } else {
+    speakViaBackend(sentence, currentLang);
+  }
+});
+
+document.getElementById('btnTranslate').addEventListener('click', () => {
+  const sentence = document.getElementById('outSentence').textContent;
+  if (!sentence || sentence === '—') return;
+  if (currentLang === 'en') {
+    alert('Select Hindi or Gujarati first.');
+    return;
+  }
+
+  fetch('/api/translate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: sentence, lang: currentLang })
+  })
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById('outTranslated').textContent = d.translated || sentence;
+    document.getElementById('translatedRow').style.display = 'flex';
+    if (d.audio) {
+      playBase64Audio(d.audio);
+    }
+  });
+});
+
+function playBase64Audio(b64) {
+  const audio = new Audio('data:audio/mp3;base64,' + b64);
+  audio.play();
+}
+
+function speakViaBackend(text, lang) {
+  fetch('/api/translate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text, lang })
+  })
+  .then(r => r.json())
+  .then(d => { if (d.audio) playBase64Audio(d.audio); });
+}
+
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+const themeToggle = document.getElementById('themeToggle');
+const themeLabel  = document.getElementById('themeLabel');
+const LIGHT_CLASS = 'light-mode';
+
+if (localStorage.getItem('sl2ts-theme') === 'light') {
+  document.body.classList.add(LIGHT_CLASS);
+  themeLabel.textContent = 'Dark';
+}
+
+themeToggle.addEventListener('click', () => {
+  const isLight = document.body.classList.toggle(LIGHT_CLASS);
+  themeLabel.textContent = isLight ? 'Dark' : 'Light';
+  localStorage.setItem('sl2ts-theme', isLight ? 'light' : 'dark');
+});
+
+document.getElementById('videoFeed').onerror = function() {
+  this.alt = '⚠ Camera not accessible. Ensure Flask server is running with webcam connected.';
+};
+</script>
+</body>
+</html>
